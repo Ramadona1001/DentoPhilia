@@ -2077,7 +2077,13 @@
           <!-- /DROPDOWN NAVIGATION CATEGORY -->
 
           <!-- DROPDOWN NAVIGATION LINK -->
-          <a class="dropdown-navigation-link" href="hub-profile-info.html">Profile Info</a>
+          @if (Auth::user()->hasRole('Doctor'))
+          <a class="dropdown-navigation-link" href="{{ route('profile_doctors') }}">{{ transWord('My Profile') }}</a>
+          @endif
+
+          @if (Auth::user()->hasRole('Business Account'))
+          <a class="dropdown-navigation-link" href="{{ route('profile_business_accounts') }}">{{ transWord('My Profile') }}</a>
+          @endif
           <!-- /DROPDOWN NAVIGATION LINK -->
 
           <!-- DROPDOWN NAVIGATION LINK -->

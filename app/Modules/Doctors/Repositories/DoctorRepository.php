@@ -4,6 +4,7 @@
 namespace Doctors\Repositories;
 
 use App\User;
+use Cases\Models\Cases;
 use Doctors\Models\Doctor;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -71,5 +72,21 @@ class DoctorRepository implements DoctorRepositoryInterface
     public function getDoctorDataByUser($user_id)
     {
         return Doctor::where('user_id',$user_id)->get()->first();
+    }
+
+    public function getDoctorCase($id)
+    {
+        return Cases::where('user_id',$id)->get();
+    }
+
+    public function getDoctorCaseTypes($id)
+    {
+        $cases =  Cases::select('type')->where('user_id',$id)->get();
+        $types = [];
+        foreach ($cases as $case) {
+            array_push($types,$case->type);
+        }
+        return array_unique($types);
+
     }
 }

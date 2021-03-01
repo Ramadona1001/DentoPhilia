@@ -15,6 +15,8 @@ $namespace = "Doctors\Controllers";
                     Route::get('/delete/{id}', 'DoctorController@delete')->name('delete_doctors');
                     Route::get('/complete-profile', 'DoctorController@completeProfile')->name('complete_profile_doctors');
                     Route::post('/completeprofile', 'DoctorController@completeProfilePost')->name('complete_profile_post_doctors');
+                    Route::get('/profile', 'DoctorController@profile')->name('profile_doctors');
+                    Route::get('/cases', 'DoctorController@cases')->name('cases_doctors');
                 });
             });
         });

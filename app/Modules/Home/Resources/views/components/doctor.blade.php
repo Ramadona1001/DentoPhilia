@@ -12,10 +12,11 @@
 @endif
 
 
-    {{-- Doctor Cases --}}
     @if (count(checkDoctorProfileIsComplete()) <= 0)
     <br>
     <div class="slider-line medium">
+
+
 
         <div id="reaction-stats-slider-controls" class="slider-controls" aria-label="Carousel Navigation" tabindex="0">
 
@@ -24,6 +25,7 @@
               <use xlink:href="#svg-small-arrow"></use>
             </svg>
           </div>
+
 
           <div class="slider-control right" aria-controls="reaction-stats-slider" tabindex="-1" data-controls="next" aria-disabled="true">
             <svg class="slider-control-icon icon-small-arrow">
@@ -36,6 +38,16 @@
             <div id="reaction-stats-slider-mw" class="tns-ovh">
                 <div class="tns-inner" id="reaction-stats-slider-iw">
                     <div id="reaction-stats-slider" class="slider-slides with-separator  tns-slider tns-carousel tns-subpixel tns-calc tns-horizontal" style="transform: translate3d(-139px, 0px, 0px);">
+
+                        @can('show_cases_endo')
+                        <div class="slider-slide tns-item" id="reaction-stats-slider-item0" aria-hidden="true" tabindex="-1">
+                            <div class="reaction-stat">
+                                <img class="reaction-stat-image" src="{{ asset('dento/img/icons/black/item.png') }}" alt="reaction-like">
+                                <p class="reaction-stat-title" style="text-transform: uppercase;">{{ transWord('Item') }}</p>
+                                <p class="reaction-stat-text"><a href="{{ route('all_doctor_cases',['type'=>'endo']) }}">{{ transWord('View') }}</a></p>
+                            </div>
+                        </div>
+                        @endcan
 
                         @can('show_cases_endo')
                         <div class="slider-slide tns-item" id="reaction-stats-slider-item0" aria-hidden="true" tabindex="-1">
@@ -100,7 +112,7 @@
                         @can('show_cases_fixedprothesis')
                         <div class="slider-slide tns-item" id="reaction-stats-slider-item1" aria-hidden="true" tabindex="-1">
                             <div class="reaction-stat">
-                                <img class="reaction-stat-image" src="{{ asset('dento/img/icons/black/prothesis.png') }}" alt="reaction-like">
+                                <img class="reaction-stat-image" src="{{ asset('dento/img/icons/black/proth.png') }}" alt="reaction-like">
                                 <p class="reaction-stat-title" style="text-transform: uppercase;">{{ transWord('Fixed Prothesis') }}</p>
                                 <p class="reaction-stat-text"><a href="{{ route('all_doctor_cases',['type'=>'fixedprothesis']) }}">{{ transWord('View') }}</a></p>
                             </div>
@@ -110,7 +122,7 @@
                         @can('show_cases_movableprothesis')
                         <div class="slider-slide tns-item" id="reaction-stats-slider-item1" aria-hidden="true" tabindex="-1">
                             <div class="reaction-stat">
-                                <img class="reaction-stat-image" src="{{ asset('dento/img/icons/black/prothesis.png') }}" alt="reaction-like">
+                                <img class="reaction-stat-image" src="{{ asset('dento/img/icons/black/proth.png') }}" alt="reaction-like">
                                 <p class="reaction-stat-title" style="text-transform: uppercase;">{{ transWord('Movable Prothesis') }}</p>
                                 <p class="reaction-stat-text"><a href="{{ route('all_doctor_cases',['type'=>'movableprothesis']) }}">{{ transWord('View') }}</a></p>
                             </div>

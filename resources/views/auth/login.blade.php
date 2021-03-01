@@ -90,7 +90,17 @@
             <!-- FORM ITEM -->
             <div class="form-item">
               <!-- BUTTON -->
-              <button type="submit" class="button medium secondary">Login to your Account!</button>
+              <button type="submit" class="button medium secondary">{{ transWord('Login to your Account') }}</button>
+              <!-- /BUTTON -->
+            </div>
+            <!-- /FORM ITEM -->
+          </div>
+
+          <div class="form-row" style="text-align: center">
+            <!-- FORM ITEM -->
+            <div class="form-item">
+              <!-- BUTTON -->
+              <a href="{{ url('/register') }}" style="font-weight: bold;">{{ transWord('Create New Account') }}</a>
               <!-- /BUTTON -->
             </div>
             <!-- /FORM ITEM -->

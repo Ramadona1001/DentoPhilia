@@ -4,6 +4,7 @@
 namespace Users\Repositories;
 
 use App\User;
+use BusinessAccounts\Models\BusinessAccount;
 use Doctors\Models\Doctor;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -89,6 +90,12 @@ class UserRepository implements UserRepositoryInterface
             $doctor = new Doctor();
             $doctor->user_id = $user->id;
             $doctor->save();
+        }
+
+        if ($request->type == 'Business Account') {
+            $business_account = new BusinessAccount();
+            $business_account->user_id = $user->id;
+            $business_account->save();
         }
 
         if(Role::where('name',$request->type)->get()->count() == 0)

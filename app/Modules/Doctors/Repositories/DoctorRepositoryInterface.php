@@ -9,4 +9,6 @@ interface DoctorRepositoryInterface
     public function saveData($request,$id=null);
     public function deleteData($id);
     public function getDoctorDataByUser($user_id);
+    public function getDoctorCase($id);
+    public function getDoctorCaseTypes($id);
 }

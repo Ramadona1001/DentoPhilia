@@ -101,6 +101,25 @@ class DoctorController extends Controller
         return redirect()->route('website');
     }
 
+    public function profile()
+    {
+        $title = transWord('My Profile');
+        $user = Auth::user();
+        $doctor = $this->doctorRepository->getDoctorDataByUser($user->id);
+        $cases = $this->doctorRepository->getDoctorCase($user->id);
+        return view($this->path.'profile.profile',compact('doctor','cases','title'));
+    }
+
+    public function cases()
+    {
+        $title = transWord('My Cases');
+        $user = Auth::user();
+        $doctor = $this->doctorRepository->getDoctorDataByUser($user->id);
+        $cases = $this->doctorRepository->getDoctorCase($user->id);
+        $casesTypes = $this->doctorRepository->getDoctorCaseTypes($user->id);
+        return view($this->path.'profile.cases',compact('doctor','cases','title','casesTypes'));
+    }
+
 
 
 }

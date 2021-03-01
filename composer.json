@@ -54,10 +54,16 @@
             "Home\\": "app/Modules/Home/",
             "Users\\": "app/Modules/Users/",
             "Doctors\\": "app/Modules/Doctors/",
-            "Cases\\": "app/Modules/Cases/"
+            "Cases\\": "app/Modules/Cases/",
+            "BusinessAccounts\\": "app/Modules/BusinessAccounts/",
+            "Items\\": "app/Modules/Items/",
+            "ItemsCategories\\": "app/Modules/ItemsCategories/"
         },
         "files": [
-            "app/helper/helper.php"
+            "app/helper/helper.php",
+            "app/helper/dental_equipments.php",
+            "app/helper/dental_consumables.php",
+            "app/helper/dental_instruments.php"
         ],
         "classmap": [
             "database/seeds",

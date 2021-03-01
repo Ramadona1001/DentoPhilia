@@ -1,10 +1,12 @@
 <?php
 
 use App\User;
+use BusinessAccounts\Models\BusinessAccount;
 use Courses\Models\Course;
 use CourseSections\Models\CourseSection;
 use CourseSessions\Models\CourseSession;
 use Doctors\Models\Doctor;
+use ItemsCategories\Models\FirstCat;
 use ModelAttachments\Models\ModelAttachment;
 use ModelQuizzes\Models\ModelQuiz;
 use Pages\Models\Page;
@@ -364,15 +366,13 @@ function checkDoctorProfileIsComplete()
     $cols = \DB::getSchemaBuilder()->getColumnListing('doctors');
     $empty = [];
     foreach ($cols as $key => $value) {
-        if ($cols[$key] == 'id' || $cols[$key] == 'created_at' || $cols[$key] == 'updated_at' || $cols[$key] == 'end_study') {
+        if ($cols[$key] == 'id' || $cols[$key] == 'created_at' || $cols[$key] == 'updated_at' || $cols[$key] == 'end_study' || $cols[$key] == 'user_id') {
             unset($cols[$key]);
         }
     }
 
     $cols = implode(' is null or ',$cols).' is null';
-
     $query = \DB::select('select * from doctors where '.$cols.' and user_id = '.\Auth::user()->id);
-
 
     if (count($query) > 0) {
         foreach ($query[0] as $key => $value) {
@@ -387,6 +387,62 @@ function checkDoctorProfileIsComplete()
         return $query;
     }
 
+}
+
+function checkBusinessAccountProfileIsComplete()
+{
+    $cols = \DB::getSchemaBuilder()->getColumnListing('business_accounts');
+
+
+    $empty = [];
+    foreach ($cols as $key => $value) {
+        if ($cols[$key] == 'id' || $cols[$key] == 'created_at' || $cols[$key] == 'updated_at' || $cols[$key] == 'user_id' || $cols[$key] == 'approve') {
+            unset($cols[$key]);
+        }
+    }
+
+    $cols = implode(' is null or ',$cols).' is null';
+    $query = \DB::select('select * from business_accounts where '.$cols.' and user_id = '.\Auth::user()->id);
+
+    // dd('select * from business_accounts where '.$cols.' and user_id = '.\Auth::user()->id);
+
+    if (count($query) > 0) {
+
+        foreach ($query[0] as $key => $value) {
+            if ($key != 'approve') {
+                if ($value == null) {
+                    array_push($empty,$key);
+                }
+            }
+        }
+        return $empty;
+    }else{
+        return $query;
+    }
+
+}
+
+function businessAccountTypes()
+{
+    return [
+        'Shop' => trans('Shop'),
+        'Education' => trans('Education'),
+        'Lab' => trans('Lab'),
+    ];
+}
+
+function checkApproveBusinessAccount($id)
+{
+    $user = User::findOrfail($id);
+    $businessAccount = BusinessAccount::where('user_id',$user->id)->get()->first();
+    return $businessAccount->approve;
+}
+
+function getBusinessAcountTypeByUser($id)
+{
+    $user = User::findOrfail($id);
+    $businessAccount = BusinessAccount::where('user_id',$user->id)->get()->first();
+    return $businessAccount->type;
 }
 
 function uploadImage($path,$name,$filename,$model)
@@ -411,6 +467,22 @@ function uploadImageAndDeleteOld($delete_path,$path,$name,$filename,$model)
         $model->$name = $imageName;
     }
 }
+
+function getFirstCategory() // Add Item For Shop User
+{
+    return FirstCat::where('item_for',0)->where('species',0)->get();
+}
+
+function getFirstCategoryLab() // Add Item For Shop User
+{
+    return FirstCat::where('item_for',1)->where('species',0)->get();
+}
+
+function getFirstCategoryForLabUser() // Add Item For Lab User
+{
+    return FirstCat::where('species',1)->get();
+}
+
 
 function getCasesAndPermissions($type,$permission)
 {

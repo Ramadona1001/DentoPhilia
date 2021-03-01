@@ -26,12 +26,14 @@
 
     @include('Home::components.doctor')
 
+    @include('Home::components.business_accounts')
+
     <div class="grid grid-3-3-3-3">
         @can('show_users')
         <a class="product-category-box users-featured" href="{{ route('users') }}">
           <p class="product-category-box-title">{{ transWord('Users') }}</p>
           @can('users_statistics')
-          <p class="product-category-box-text">{{ transWord('Accounts Into System') }}</p>
+          <p class="product-category-box-text">{{ transWord('Accounts Statistics') }}</p>
           <p class="product-category-box-tag">254 {{ transWord('user') }}</p>
           @endcan
         </a>
@@ -41,8 +43,18 @@
         <a class="product-category-box users-featured" href="{{ route('doctors') }}">
           <p class="product-category-box-title">{{ transWord('Doctors') }}</p>
           @can('doctors_statistics')
-          <p class="product-category-box-text">{{ transWord('Doctors Into System') }}</p>
+          <p class="product-category-box-text">{{ transWord('Doctors Statistics') }}</p>
           <p class="product-category-box-tag">254 {{ transWord('doctors') }}</p>
+          @endcan
+        </a>
+        @endcan
+
+        @can('show_business_accounts')
+        <a class="product-category-box users-featured" href="{{ route('business_accounts') }}">
+          <p class="product-category-box-title">{{ transWord('Business Accounts') }}</p>
+          @can('businessAccounts_statistics')
+          <p class="product-category-box-text">{{ transWord('Business Accounts Statistics') }}</p>
+          <p class="product-category-box-tag">254 {{ transWord('Business Accounts') }}</p>
           @endcan
         </a>
         @endcan
@@ -53,6 +65,16 @@
           @can('roles_statistics')
           <p class="product-category-box-text">{{ transWord('All Roles in System') }}</p>
           <p class="product-category-box-tag">254 {{ transWord('role') }}</p>
+          @endcan
+        </a>
+        @endcan
+
+        @can('show_items_categories')
+        <a class="product-category-box users-featured" href="{{ route('items_categories') }}">
+          <p class="product-category-box-title">{{ transWord('Items Categories') }}</p>
+          @can('itemsCategories_statistics')
+          <p class="product-category-box-text">{{ transWord('All Items Categories') }}</p>
+          <p class="product-category-box-tag">254 {{ transWord('Items Categories') }}</p>
           @endcan
         </a>
         @endcan

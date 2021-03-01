@@ -190,6 +190,9 @@ return [
         Users\Providers\UserServiceProvider::class,
         Doctors\Providers\DoctorServiceProvider::class,
         Cases\Providers\CaseServiceProvider::class,
+        BusinessAccounts\Providers\BusinessAccountServiceProvider::class,
+        Items\Providers\ItemServiceProvider::class,
+        ItemsCategories\Providers\ItemCategoryServiceProvider::class,
 
     ],
 
