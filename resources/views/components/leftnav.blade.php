@@ -70,10 +70,10 @@
         <!-- MENU ITEM -->
         <li class="menu-item">
           <!-- MENU ITEM LINK -->
-          <a class="menu-item-link text-tooltip-tfr" href="overview.html" data-title="Overview" style="position: relative;">
+          <a class="menu-item-link text-tooltip-tfr" href="{{ route('dental_market') }}" data-title="{{ transWord('Dental Market') }}" style="position: relative;">
             <!-- MENU ITEM LINK ICON -->
-            <svg class="menu-item-link-icon icon-overview">
-              <use xlink:href="#svg-overview"></use>
+            <svg class="menu-item-link-icon icon-marketplace">
+              <use xlink:href="#svg-marketplace"></use>
             </svg>
             <!-- /MENU ITEM LINK ICON -->
           <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; right: -81px; top: 50%; margin-top: -12px; opacity: 0; visibility: hidden; transform: translate(10px, 0px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">Overview</p></div></a>
@@ -84,113 +84,15 @@
         <!-- MENU ITEM -->
         <li class="menu-item">
           <!-- MENU ITEM LINK -->
-          <a class="menu-item-link text-tooltip-tfr" href="groups.html" data-title="Groups" style="position: relative;">
+          <a class="menu-item-link text-tooltip-tfr" href="{{ route('cases_market') }}" data-title="{{ transWord('Cases') }}" style="position: relative;">
             <!-- MENU ITEM LINK ICON -->
-            <svg class="menu-item-link-icon icon-group">
-              <use xlink:href="#svg-group"></use>
-            </svg>
+            <img class="menu-item-link-icon" src="{{ asset('dento/img/tooth.png') }}" width="20" height="20" alt="" srcset="">
             <!-- /MENU ITEM LINK ICON -->
           <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; right: -71px; top: 50%; margin-top: -12px; opacity: 0; visibility: hidden; transform: translate(10px, 0px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">Groups</p></div></a>
           <!-- /MENU ITEM LINK -->
         </li>
         <!-- /MENU ITEM -->
 
-        <!-- MENU ITEM -->
-        <li class="menu-item">
-          <!-- MENU ITEM LINK -->
-          <a class="menu-item-link text-tooltip-tfr" href="members.html" data-title="Members" style="position: relative;">
-            <!-- MENU ITEM LINK ICON -->
-            <svg class="menu-item-link-icon icon-members">
-              <use xlink:href="#svg-members"></use>
-            </svg>
-            <!-- /MENU ITEM LINK ICON -->
-          <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; right: -81px; top: 50%; margin-top: -12px; opacity: 0; visibility: hidden; transform: translate(10px, 0px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">Members</p></div></a>
-          <!-- /MENU ITEM LINK -->
-        </li>
-        <!-- /MENU ITEM -->
-
-        <!-- MENU ITEM -->
-        <li class="menu-item">
-          <!-- MENU ITEM LINK -->
-          <a class="menu-item-link text-tooltip-tfr" href="badges.html" data-title="Badges" style="position: relative;">
-            <!-- MENU ITEM LINK ICON -->
-            <svg class="menu-item-link-icon icon-badges">
-              <use xlink:href="#svg-badges"></use>
-            </svg>
-            <!-- /MENU ITEM LINK ICON -->
-          <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; right: -71px; top: 50%; margin-top: -12px; opacity: 0; visibility: hidden; transform: translate(10px, 0px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">Badges</p></div></a>
-          <!-- /MENU ITEM LINK -->
-        </li>
-        <!-- /MENU ITEM -->
-
-        <!-- MENU ITEM -->
-        <li class="menu-item">
-          <!-- MENU ITEM LINK -->
-          <a class="menu-item-link text-tooltip-tfr" href="quests.html" data-title="Quests" style="position: relative;">
-            <!-- MENU ITEM LINK ICON -->
-            <svg class="menu-item-link-icon icon-quests">
-              <use xlink:href="#svg-quests"></use>
-            </svg>
-            <!-- /MENU ITEM LINK ICON -->
-          <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; right: -69px; top: 50%; margin-top: -12px; opacity: 0; visibility: hidden; transform: translate(10px, 0px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">Quests</p></div></a>
-          <!-- /MENU ITEM LINK -->
-        </li>
-        <!-- /MENU ITEM -->
-
-        <!-- MENU ITEM -->
-        <li class="menu-item">
-          <!-- MENU ITEM LINK -->
-          <a class="menu-item-link text-tooltip-tfr" href="streams.html" data-title="Streams" style="position: relative;">
-            <!-- MENU ITEM LINK ICON -->
-            <svg class="menu-item-link-icon icon-streams">
-              <use xlink:href="#svg-streams"></use>
-            </svg>
-            <!-- /MENU ITEM LINK ICON -->
-          <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; right: -75px; top: 50%; margin-top: -12px; opacity: 0; visibility: hidden; transform: translate(10px, 0px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">Streams</p></div></a>
-          <!-- /MENU ITEM LINK -->
-        </li>
-        <!-- /MENU ITEM -->
-
-        <!-- MENU ITEM -->
-        <li class="menu-item">
-          <!-- MENU ITEM LINK -->
-          <a class="menu-item-link text-tooltip-tfr" href="events.html" data-title="Events" style="position: relative;">
-            <!-- MENU ITEM LINK ICON -->
-            <svg class="menu-item-link-icon icon-events">
-              <use xlink:href="#svg-events"></use>
-            </svg>
-            <!-- /MENU ITEM LINK ICON -->
-          <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; right: -67px; top: 50%; margin-top: -12px; opacity: 0; visibility: hidden; transform: translate(10px, 0px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">Events</p></div></a>
-          <!-- /MENU ITEM LINK -->
-        </li>
-        <!-- /MENU ITEM -->
-
-        <!-- MENU ITEM -->
-        <li class="menu-item">
-          <!-- MENU ITEM LINK -->
-          <a class="menu-item-link text-tooltip-tfr" href="forums.html" data-title="Forums" style="position: relative;">
-            <!-- MENU ITEM LINK ICON -->
-            <svg class="menu-item-link-icon icon-forums">
-              <use xlink:href="#svg-forums"></use>
-            </svg>
-            <!-- /MENU ITEM LINK ICON -->
-          <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; right: -72px; top: 50%; margin-top: -12px; opacity: 0; visibility: hidden; transform: translate(10px, 0px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">Forums</p></div></a>
-          <!-- /MENU ITEM LINK -->
-        </li>
-        <!-- /MENU ITEM -->
-
-        <!-- MENU ITEM -->
-        <li class="menu-item">
-          <!-- MENU ITEM LINK -->
-          <a class="menu-item-link text-tooltip-tfr" href="marketplace.html" data-title="Marketplace" style="position: relative;">
-            <!-- MENU ITEM LINK ICON -->
-            <svg class="menu-item-link-icon icon-marketplace">
-              <use xlink:href="#svg-marketplace"></use>
-            </svg>
-            <!-- /MENU ITEM LINK ICON -->
-          <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; right: -97px; top: 50%; margin-top: -12px; opacity: 0; visibility: hidden; transform: translate(10px, 0px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">Marketplace</p></div></a>
-          <!-- /MENU ITEM LINK -->
-        </li>
         <!-- /MENU ITEM -->
       </ul>
     <!-- /MENU -->

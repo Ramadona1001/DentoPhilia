@@ -2,11 +2,14 @@
 
 use App\User;
 use BusinessAccounts\Models\BusinessAccount;
+use Cases\Models\Cases;
 use Courses\Models\Course;
 use CourseSections\Models\CourseSection;
 use CourseSessions\Models\CourseSession;
 use Doctors\Models\Doctor;
+use Items\Models\Item;
 use ItemsCategories\Models\FirstCat;
+use ItemsCategories\Models\SecondCat;
 use ModelAttachments\Models\ModelAttachment;
 use ModelQuizzes\Models\ModelQuiz;
 use Pages\Models\Page;
@@ -483,6 +486,21 @@ function getFirstCategoryForLabUser() // Add Item For Lab User
     return FirstCat::where('species',1)->get();
 }
 
+function getCases()
+{
+    return [
+        'endo',
+        'pedo',
+        'dentaldesigner',
+        'dentalphotography',
+        'implants',
+        'operative',
+        'ortho',
+        'perio',
+        'prothesis',
+        'surgery'
+    ];
+}
 
 function getCasesAndPermissions($type,$permission)
 {
@@ -503,5 +521,48 @@ function getCasesAndPermissions($type,$permission)
         if ($type == $case) {
             return hasPermissions($permission.'_cases_'.$type);
         }
+    }
+}
+
+function getUserAvatar($userid)
+{
+    $user = User::findOrfail($userid);
+    if ($user->hasRole('Doctor')) {
+        if($user->gender == 'Male'){
+            return 'dento/img/avatar/doctor_male.png';
+        }else{
+            return 'dento/img/avatar/doctor_female.png';
+        }
+    }
+
+    if ($user->hasRole('Business Account')) {
+        if($user->gender == 'Male'){
+            return 'dento/img/avatar/businessman.png';
+        }else{
+            return 'dento/img/avatar/businesswoman.png';
+        }
+    }
+
+    if ($user->hasRole('Admin')) {
+        return 'dento/img/avatar/admin.png';
+    }
+}
+
+function getCategoryItemCount($cattype,$catid)
+{
+    return Item::where($cattype,$catid)->count();
+}
+
+function getCaseItemCount($type)
+{
+    return Cases::where('type',$type)->count();
+}
+
+function getSecondCategory($catid)
+{
+    if (is_array($catid)) {
+        return SecondCat::whereIn('id',$catid)->get();
+    }else{
+        return SecondCat::where('id',$catid)->get();
     }
 }

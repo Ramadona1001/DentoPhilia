@@ -57,7 +57,9 @@
             "Cases\\": "app/Modules/Cases/",
             "BusinessAccounts\\": "app/Modules/BusinessAccounts/",
             "Items\\": "app/Modules/Items/",
-            "ItemsCategories\\": "app/Modules/ItemsCategories/"
+            "ItemsCategories\\": "app/Modules/ItemsCategories/",
+            "DentalMarket\\": "app/Modules/DentalMarket/",
+            "CasesMarket\\": "app/Modules/CasesMarket/"
         },
         "files": [
             "app/helper/helper.php",

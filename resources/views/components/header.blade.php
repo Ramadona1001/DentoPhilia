@@ -58,7 +58,7 @@
           <!-- MENU MAIN ITEM -->
           <li class="menu-main-item">
             <!-- MENU MAIN ITEM LINK -->
-            <a class="menu-main-item-link" href="{{ route('website') }}">Home</a>
+            <a class="menu-main-item-link" href="{{ route('website') }}">{{ transWord('Home') }}</a>
             <!-- /MENU MAIN ITEM LINK -->
           </li>
           <!-- /MENU MAIN ITEM -->
@@ -66,7 +66,7 @@
           <!-- MENU MAIN ITEM -->
           <li class="menu-main-item">
             <!-- MENU MAIN ITEM LINK -->
-            <a class="menu-main-item-link" href="#">Careers</a>
+            <a class="menu-main-item-link" href="{{ route('dental_market') }}">{{ transWord('Dental Market') }}</a>
             <!-- /MENU MAIN ITEM LINK -->
           </li>
           <!-- /MENU MAIN ITEM -->

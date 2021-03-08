@@ -193,6 +193,8 @@ return [
         BusinessAccounts\Providers\BusinessAccountServiceProvider::class,
         Items\Providers\ItemServiceProvider::class,
         ItemsCategories\Providers\ItemCategoryServiceProvider::class,
+        DentalMarket\Providers\DentalMarketServiceProvider::class,
+        CasesMarket\Providers\CasesMarketServiceProvider::class,
 
     ],
 

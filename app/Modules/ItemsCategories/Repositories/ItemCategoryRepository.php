@@ -84,7 +84,11 @@ class ItemCategoryRepository implements ItemCategoryRepositoryInterface
 
     public function getSecondDataByFirstCategory($id)
     {
-        return SecondCat::where('first_cat',$id)->get();
+        if (is_array($id)) {
+            return SecondCat::whereIn('first_cat',$id)->get();
+        }else{
+            return SecondCat::where('first_cat',$id)->get();
+        }
     }
 
     public function getThirdDataBySecondCategory($id)
