@@ -4,11 +4,12 @@
 namespace Blogs\Repositories;
 
 use Blogs\Models\Blog;
+use File;
 
 class BlogRepository implements BlogRepositoryInterface
 {
     public function allData(){
-        return Blog::all();
+        return Blog::paginate(6);
     }
 
     public function dataWithConditions( $conditions){
@@ -26,21 +27,27 @@ class BlogRepository implements BlogRepositoryInterface
 
     public function saveData($request,$id = null)
     {
+        $blogPath = public_path().'/uploads/blogs/';
+        $blogDeletePath = 'uploads\\blogs\\';
+        File::makeDirectory($blogPath, $mode = 0777, true, true);
+
         if ($id == null) {
             $blog = new Blog();
+            uploadImage($blogPath,'blog_img','blog_',$blog);
         }else{
             $blog = $this->getDataId($id);
+            uploadImageAndDeleteOld($blogDeletePath,$blogPath,'blog_img','blog_',$blog);
         }
-        $blog->title = json_encode($request->title);
-        $blog->tags = json_encode($request->tags);
-        $blog->content = json_encode($request->content);
+        $blog->title = $request->title;
+        $blog->tags = $request->tags;
+        $blog->content = $request->content;
         $blog->publish = $request->publish;
         if(isset($request->meta_title))
-            $blog->meta_title = json_encode($request->meta_title);
+            $blog->meta_title = $request->meta_title;
         if(isset($request->meta_desc))
-            $blog->meta_desc = json_encode($request->meta_desc);
+            $blog->meta_desc = $request->meta_desc;
         if(isset($request->meta_keywords))
-            $blog->meta_keywords = json_encode($request->meta_keywords);
+            $blog->meta_keywords = $request->meta_keywords;
         $blog->save();
     }
 

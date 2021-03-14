@@ -28,7 +28,7 @@
 
     @include('Home::components.business_accounts')
 
-    <div class="grid grid-3-3-3-3">
+    <div class="grid grid-3-3-3">
         @can('show_users')
         <a class="product-category-box users-featured" href="{{ route('users') }}">
           <p class="product-category-box-title">{{ transWord('Users') }}</p>

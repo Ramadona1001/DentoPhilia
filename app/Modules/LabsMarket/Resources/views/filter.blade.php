@@ -2,7 +2,7 @@
 
 @section('title',$title)
 
-@section('dental_market_active','active')
+@section('labs_market_active','active')
 
 @section('stylesheet')
 
@@ -23,18 +23,18 @@
         </div>
     </div>
 
-      <div class="grid grid-3-9 small-space">
 
+      <div class="grid grid-3-9 small-space">
         <!-- MARKETPLACE SIDEBAR -->
         <form action="{{ route('filter_dental_market') }}" method="post">
             @csrf
             <div class="marketplace-sidebar">
                 <!-- SIDEBAR BOX -->
                 <div class="form-input">
-                    <label for="items-search">Search Items</label>
-                    <input type="text" id="items-search" name="items_search">
+                    <input placeholder="Search Items" type="text" @if ($request->items_search != null) value="{{ $request->items_search }}" @endif id="items-search" name="items_search">
                   </div>
                   <br>
+
                 <div class="sidebar-box">
                   <!-- SIDEBAR BOX TITLE -->
                   <p class="sidebar-box-title">Categories</p>
@@ -45,7 +45,25 @@
                       @foreach ($firstCat as $first)
                           <div class="checkbox-line">
                               <div class="checkbox-wrap">
-                                  <input type="checkbox" class="first_category" id="{{ $first->name }}" name="first_category[]" value="{{ $first->id }}">
+                                  @if (isset($request->first_category))
+                                    @if (is_array($request->first_category))
+                                        @if (in_array($first->id,$request->first_category))
+                                            <input type="checkbox" class="first_category" checked id="{{ $first->name }}" name="first_category[]" value="{{ $first->id }}">
+                                        @else
+                                            <input type="checkbox" class="first_category" id="{{ $first->name }}" name="first_category[]" value="{{ $first->id }}">
+                                        @endif
+                                    @else
+                                        @if ($first->id == $request->first_category[0])
+                                        <input type="checkbox" class="first_category" checked id="{{ $first->name }}" name="first_category[]" value="{{ $first->id }}">
+                                        @else
+                                            <input type="checkbox" class="first_category" id="{{ $first->name }}" name="first_category[]" value="{{ $first->id }}">
+                                        @endif
+                                    @endif
+                                    @else
+                                    <input type="checkbox" class="first_category" id="{{ $first->name }}" name="first_category[]" value="{{ $first->id }}">
+                                  @endif
+
+
                                   <div class="checkbox-box">
                                       <svg class="icon-cross">
                                           <use xlink:href="#svg-cross"></use>
@@ -58,27 +76,21 @@
                   </div>
                   <div class="sidebar-box-items" id="second_category">
                       <hr>
-                  </div>
-                  <!-- /SIDEBAR BOX ITEMS -->
-
-                  <!-- SIDEBAR BOX TITLE -->
-                  <p class="sidebar-box-title">{{ transWord('For Labs') }}</p>
-
-                  <div class="sidebar-box-items">
-
+                      @if (isset($request->second_category))
+                      @foreach (getSecondCategory($request->second_category) as $item)
                       <div class="checkbox-line">
-                      <div class="checkbox-wrap">
-                        <input type="checkbox" id="lab_category" name="lab_category">
-                        <div class="checkbox-box">
-                          <svg class="icon-cross">
-                            <use xlink:href="#svg-cross"></use>
-                          </svg>
+                        <div class="checkbox-wrap">
+                            <input type="checkbox" class="second_category" checked checked id="{{ $item->name }}" name="second_category[]" value="{{ $item->id }}">
+                            <div class="checkbox-box">
+                                <svg class="icon-cross">
+                                    <use xlink:href="#svg-cross"></use>
+                                </svg>
+                            </div>
+                            <label for="{{ $item->name }}">{{ $item->name }}</label>
                         </div>
-                        <label for="lab_category">{{ transWord('Labs') }}</label>
-                      </div>
-                      <p class="checkbox-line-text">{{ getCategoryItemCount('item_for',1) }}</p>
-                    </div>
-
+                        </div>
+                      @endforeach
+                      @endif
                   </div>
                   <!-- /SIDEBAR BOX ITEMS -->
 
@@ -93,14 +105,14 @@
                       <!-- FORM INPUT -->
                       <div class="form-input small active always-active currency-decorated">
                         <label for="price-from">From</label>
-                        <input type="text" id="price-from" name="price_from">
+                        <input type="text" id="price-from" name="price_from" @if ($request->price_from != null) value="{{ $request->price_from }}" @endif>
                       </div>
                       <!-- /FORM INPUT -->
 
                       <!-- FORM INPUT -->
                       <div class="form-input small active always-active currency-decorated">
                         <label for="price-to">To</label>
-                        <input type="text" id="price-to" name="price_to">
+                        <input type="text" id="price-to" name="price_to" @if ($request->price_to != null) value="{{ $request->price_to }}" @endif>
                       </div>
                       <!-- /FORM INPUT -->
                     </div>
@@ -119,8 +131,9 @@
         <!-- MARKETPLACE CONTENT -->
         <div class="marketplace-content">
           <div class="grid grid-4-4-4 centered">
-            @if (count($dentalMarket) > 0)
-            @foreach ($dentalMarket as $item)
+
+            @if (count($labsMarket) > 0)
+            @foreach ($labsMarket as $item)
             <div class="product-preview">
                 <a href="marketplace-product.html">
                   <figure class="product-preview-image liquid" style="background: url({{ asset('uploads/business_accounts/items/'.$item->image) }}) center center / cover no-repeat;">
@@ -168,11 +181,9 @@
             @endif
 
 
+
           </div>
 
-          <div class="section-pager-bar-wrap">
-              {{ $dentalMarket->links() }}
-          </div>
         </div>
       </div>
 
@@ -194,7 +205,12 @@
     }
 
     $(document).ready(function(){
-      $('#second_category').hide();
+        var requestSecond = '<?php print_r($request->second_category); ?>';
+        if (requestSecond == null) {
+            $('#second_category').hide();
+        }else{
+            $('#second_category').show();
+        }
       var firstCatCheckBoxArray = [];
         $('input[class=first_category]').click(function(){
             if($(this).prop("checked") == true){

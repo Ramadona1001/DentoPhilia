@@ -2,6 +2,8 @@
 
 @section('title',$title)
 
+@section('dental_market_active','active')
+
 @section('stylesheet')
 
 @endsection
@@ -108,7 +110,6 @@
                         </div>
                         <label for="lab_category">{{ transWord('Labs') }}</label>
                       </div>
-                      <p class="checkbox-line-text">{{ getCategoryItemCount('item_for',1) }}</p>
                     </div>
 
                   </div>

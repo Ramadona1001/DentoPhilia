@@ -2,7 +2,7 @@
 
 @section('title',$title)
 
-@section('dental_market_active','active')
+@section('labs_market_active','active')
 
 @section('stylesheet')
 
@@ -26,7 +26,7 @@
       <div class="grid grid-3-9 small-space">
 
         <!-- MARKETPLACE SIDEBAR -->
-        <form action="{{ route('filter_dental_market') }}" method="post">
+        <form action="{{ route('filter_labs_market') }}" method="post">
             @csrf
             <div class="marketplace-sidebar">
                 <!-- SIDEBAR BOX -->
@@ -58,27 +58,6 @@
                   </div>
                   <div class="sidebar-box-items" id="second_category">
                       <hr>
-                  </div>
-                  <!-- /SIDEBAR BOX ITEMS -->
-
-                  <!-- SIDEBAR BOX TITLE -->
-                  <p class="sidebar-box-title">{{ transWord('For Labs') }}</p>
-
-                  <div class="sidebar-box-items">
-
-                      <div class="checkbox-line">
-                      <div class="checkbox-wrap">
-                        <input type="checkbox" id="lab_category" name="lab_category">
-                        <div class="checkbox-box">
-                          <svg class="icon-cross">
-                            <use xlink:href="#svg-cross"></use>
-                          </svg>
-                        </div>
-                        <label for="lab_category">{{ transWord('Labs') }}</label>
-                      </div>
-                      <p class="checkbox-line-text">{{ getCategoryItemCount('item_for',1) }}</p>
-                    </div>
-
                   </div>
                   <!-- /SIDEBAR BOX ITEMS -->
 
@@ -119,8 +98,8 @@
         <!-- MARKETPLACE CONTENT -->
         <div class="marketplace-content">
           <div class="grid grid-4-4-4 centered">
-            @if (count($dentalMarket) > 0)
-            @foreach ($dentalMarket as $item)
+            @if (count($labsMarket) > 0)
+            @foreach ($labsMarket as $item)
             <div class="product-preview">
                 <a href="marketplace-product.html">
                   <figure class="product-preview-image liquid" style="background: url({{ asset('uploads/business_accounts/items/'.$item->image) }}) center center / cover no-repeat;">
@@ -171,7 +150,7 @@
           </div>
 
           <div class="section-pager-bar-wrap">
-              {{ $dentalMarket->links() }}
+              {{ $labsMarket->links() }}
           </div>
         </div>
       </div>

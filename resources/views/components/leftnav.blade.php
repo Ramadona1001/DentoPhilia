@@ -54,7 +54,7 @@
     <!-- MENU -->
     <ul class="menu small">
         <!-- MENU ITEM -->
-        <li class="menu-item active">
+        <li class="menu-item">
           <!-- MENU ITEM LINK -->
           <a class="menu-item-link text-tooltip-tfr" href="newsfeed.html" data-title="Newsfeed" style="position: relative;">
             <!-- MENU ITEM LINK ICON -->
@@ -68,7 +68,7 @@
         <!-- /MENU ITEM -->
 
         <!-- MENU ITEM -->
-        <li class="menu-item">
+        <li class="menu-item @yield('dental_market_active')">
           <!-- MENU ITEM LINK -->
           <a class="menu-item-link text-tooltip-tfr" href="{{ route('dental_market') }}" data-title="{{ transWord('Dental Market') }}" style="position: relative;">
             <!-- MENU ITEM LINK ICON -->
@@ -82,15 +82,25 @@
         <!-- /MENU ITEM -->
 
         <!-- MENU ITEM -->
-        <li class="menu-item">
+        <li class="menu-item @yield('cases_market_active')">
           <!-- MENU ITEM LINK -->
           <a class="menu-item-link text-tooltip-tfr" href="{{ route('cases_market') }}" data-title="{{ transWord('Cases') }}" style="position: relative;">
             <!-- MENU ITEM LINK ICON -->
             <img class="menu-item-link-icon" src="{{ asset('dento/img/tooth.png') }}" width="20" height="20" alt="" srcset="">
             <!-- /MENU ITEM LINK ICON -->
-          <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; right: -71px; top: 50%; margin-top: -12px; opacity: 0; visibility: hidden; transform: translate(10px, 0px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">Groups</p></div></a>
+          <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; right: -71px; top: 50%; margin-top: -12px; opacity: 0; visibility: hidden; transform: translate(10px, 0px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">{{ transWord('Cases') }}</p></div></a>
           <!-- /MENU ITEM LINK -->
         </li>
+
+        <li class="menu-item @yield('labs_market_active')">
+            <!-- MENU ITEM LINK -->
+            <a class="menu-item-link text-tooltip-tfr" href="{{ route('labs_market') }}" data-title="{{ transWord('Cases') }}" style="position: relative;">
+              <!-- MENU ITEM LINK ICON -->
+              <img class="menu-item-link-icon" src="{{ asset('dento/img/labs.png') }}" width="23" height="23" alt="" srcset="">
+              <!-- /MENU ITEM LINK ICON -->
+            <div class="xm-tooltip" style="white-space: nowrap; position: absolute; z-index: 99999; right: -71px; top: 50%; margin-top: -12px; opacity: 0; visibility: hidden; transform: translate(10px, 0px); transition: all 0.3s ease-in-out 0s;"><p class="xm-tooltip-text">{{ transWord('Labs') }}</p></div></a>
+            <!-- /MENU ITEM LINK -->
+          </li>
         <!-- /MENU ITEM -->
 
         <!-- /MENU ITEM -->

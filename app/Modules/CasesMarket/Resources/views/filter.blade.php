@@ -2,6 +2,8 @@
 
 @section('title',$title)
 
+@section('cases_market_active','active')
+
 @section('stylesheet')
 
 @endsection
@@ -66,7 +68,6 @@
                                   </div>
                                   <label for="{{ $case }}">{{ $case }}</label>
                               </div>
-                              <p class="checkbox-line-text">{{ getCaseItemCount($case) }}</p>
                           </div>
                       @endforeach
                   </div>

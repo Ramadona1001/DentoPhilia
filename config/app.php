@@ -195,6 +195,7 @@ return [
         ItemsCategories\Providers\ItemCategoryServiceProvider::class,
         DentalMarket\Providers\DentalMarketServiceProvider::class,
         CasesMarket\Providers\CasesMarketServiceProvider::class,
+        LabsMarket\Providers\LabsMarketServiceProvider::class,
 
     ],
 

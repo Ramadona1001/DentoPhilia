@@ -37,15 +37,42 @@ function BuildFields($name , $value = null , $type="text" ,$other = null){
     }
     foreach($lang as  $key => $lan){
         $newValue = $value != null ? $value[$lan] : null;
-        $out .='<div class="col-lg-6" style="margin-bottom:10px;">';
+        $out .='<div class="form-item">';
+        $out .='<div class="form-input small active">';
         $out .='<label for="'.$name.'['.$lan.']" >'.ucfirst($name).' Language ['.$lan.']</label >';
         if($type != 'textarea'){
-            $out .='<input type = "'.$type.'" class="form-control"  name="'.$name.'['.$lan.']" id = "'.$name.'['.$lan.']" placeholder="'.$name.' in '.$lan.'" '.$others.' value="'.$newValue.'"  />';
+            $out .='<input type = "'.$type.'" class="form-control"  name="'.$name.'['.$lan.']" id = "'.$name.'['.$lan.']"  '.$others.' value="'.$newValue.'"  />';
         }else{
             $out .='<textarea name="'.$name.'['.$lan.']" id="'.$name.'['.$lan.']" class="form-control ckeditor">'.$newValue.'</textarea>';
         }
         $out .='</div>';
+        $out .='</div>';
     }
+    return $out;
+}
+
+function BuildField($name , $value = null , $type="text" ,$other = null){
+    $out = "";
+    if($other != null)
+    {
+        $others = "";
+        foreach($other as $key => $o){
+            $others .= "$key ='$o' ";
+        }
+    }else{
+        $others = null;
+    }
+    $newValue = $value != null ? $value : null;
+    $out .='<div class="form-item">';
+    $out .='<div class="form-input small active">';
+    $out .='<label for="'.$name.'" >'.ucfirst($name).'</label >';
+    if($type != 'textarea'){
+        $out .='<input type = "'.$type.'" class="form-control"  name="'.$name.'" id = "'.$name.'"  '.$others.' value="'.$newValue.'"  />';
+    }else{
+        $out .='<textarea name="'.$name.'" id="'.$name.'" class="form-control ckeditor">'.$newValue.'</textarea>';
+    }
+    $out .='</div>';
+    $out .='</div>';
     return $out;
 }
 
@@ -273,7 +300,7 @@ function convertToTags($text){
         $tags = explode(',',$text);
         $tags_html = '';
         foreach ($tags as $tag) {
-            $tags_html .= '<span class="badge badge-success" style="font-weight: bold;">'.$tag.'</span>';
+            $tags_html .= '<span class="badge badge-primary" style="font-weight: bold;">'.$tag.'</span>';
         }
         return $tags_html;
     }else{

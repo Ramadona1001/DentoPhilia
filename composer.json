@@ -59,7 +59,8 @@
             "Items\\": "app/Modules/Items/",
             "ItemsCategories\\": "app/Modules/ItemsCategories/",
             "DentalMarket\\": "app/Modules/DentalMarket/",
-            "CasesMarket\\": "app/Modules/CasesMarket/"
+            "CasesMarket\\": "app/Modules/CasesMarket/",
+            "LabsMarket\\": "app/Modules/LabsMarket/"
         },
         "files": [
             "app/helper/helper.php",

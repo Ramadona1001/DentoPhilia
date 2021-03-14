@@ -1,124 +1,101 @@
-@extends('backend.layouts.master')
+@extends('layouts.master')
 
-@section('title',transWord('Blogs'))
+@section('title',$title)
 
 @section('stylesheet')
-
-@include('backend.components.datatablecss')
-
+<style>
+    .page-item{
+        height: 24px; margin-top: 20px; font-size: .75rem; font-weight: 700; line-height: 24px;
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+</style>
 @endsection
-
 @section('content')
+<div class="content-grid" style="transform: translate(0px, 0px); transition: transform 0.4s ease-in-out 0s;">
 
-<div class="row clearfix">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="header">
-                <h2>{{ transWord('All Blogs') }}</h2>
-                <ul class="header-dropdown dropdown">
+    <div class="section-banner">
+        <img class="section-banner-icon" src="{{ asset('dento/img/banner/members-icon.png') }}" alt="dentophilia-dashboard">
+        <p class="section-banner-title">{{ $title }}</p>
+        <p class="section-banner-text">{{ transWord('Welcome').' '.Auth::user()->name.' to DentoPhilia' }}</p>
+    </div>
 
-                    <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ route('create_blogs') }}"><i class="icon-book-open"></i> {{ transWord('Create New Blog') }}</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="body">
-                <div class="table-responsive">
-                        <table id="example" class="display table table-hover js-basic-example dataTable table-custom spacing5" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th style="background: rgb(60, 64, 68);color:white;">#</th>
-                                <th style="background: rgb(60, 64, 68);color:white;">{{ transWord('Title') }}</th>
-                                <th style="background: rgb(60, 64, 68);color:white;">{{ transWord('Tags') }}</th>
-                                <th style="background: rgb(60, 64, 68);color:white;">{{ transWord('Publish') }}</th>
-                                <th style="background: rgb(60, 64, 68);color:white;">{{ transWord('Actions') }}</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="permissionTable">
-
-                            @foreach ($blogs as $index => $blog)
-                            <tr>
-                                <td style="background: #595f66;color:white;">{{ $index + 1 }}</td>
-                                <td style="background: #595f66;color:white;">{{ getDataFromJsonByLanguage($blog->title) }}</td>
-                                <td style="background: #595f66;color:white;">{!! convertToTags(getDataFromJsonByLanguage($blog->tags)) !!}</td>
-                                <td style="background: #595f66;color:white;">
-                                @if ($blog->publish == 1)
-                                <span class="badge badge-primary" style="font-weight: bold;">{{ transWord('Publish') }}</span>
-                                @else
-                                <span class="badge badge-danger" style="font-weight: bold;">{{ transWord('Un Publish') }}</span>
-                                @endif
-                                </td>
-                                <td style="background: #595f66;color:white;">
-                                    <li class="dropdown language-menu" style="list-style: none">
-                                        <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown" style="color: white;">
-                                            <i class="fa fa-bars"></i>
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item pt-2 pb-2" href="{{ route('show_blogs',$blog->id) }}"><i class="fa fa-eye"></i> @lang('tr.Show')</a>
-                                            <a class="dropdown-item pt-2 pb-2" href="{{ route('edit_blogs',$blog->id) }}"><i class="fa fa-edit"></i> @lang('tr.Edit')</a>
-                                            <a class="dropdown-item pt-2 pb-2" id="deleteBtn" href="{{ route('destroy_blogs',$blog->id) }}" onclick="return confirm('{{ transWord('Are You Sure?') }}')"><i class="fa fa-trash"></i> @lang('tr.Delete')</a>
-                                        </div>
-                                    </li>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-
-                        <tfoot>
-                            <tr>
-                                <th style="background: rgb(60, 64, 68);color:white;">#</th>
-                                <th style="background: rgb(60, 64, 68);color:white;">{{ transWord('Title') }}</th>
-                                <th style="background: rgb(60, 64, 68);color:white;">{{ transWord('Page Tag') }}</th>
-                                <th style="background: rgb(60, 64, 68);color:white;">{{ transWord('Publish') }}</th>
-                                <th style="background: rgb(60, 64, 68);color:white;">{{ transWord('Actions') }}</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
+    <div class="section-header">
+        <div class="section-header-info">
+          <p class="section-pretitle">Welcome to</p>
+          <h2 class="section-title">{{ transWord('Our Blogs') }}</h2>
         </div>
     </div>
+    <div class="section-filters-bar v7">
+        <div class="section-filters-bar-actions">
+          <form class="form">
+            <div class="form-item split">
+              <div class="form-input small" style="width: 800px;">
+                <label for="forum-search">{{ transWord('Search ...') }}</label>
+                <input type="text" id="forum-search" name="forum_search">
+              </div>
+              <button class="button primary">
+                <svg class="icon-magnifying-glass">
+                  <use xlink:href="#svg-magnifying-glass"></use>
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="table table-forum-category">
+        <div class="table-header">
+          <div class="table-header-column">
+            <p class="table-header-title">{{ transWord('Blog') }}</p>
+          </div>
+
+          <div class="table-header-column centered padded-medium">
+            <p class="table-header-title">{{ transWord('Tag') }}</p>
+          </div>
+
+          <div class="table-header-column padded-big-left">
+            <p class="table-header-title">{{ transWord('Content') }}</p>
+          </div>
+        </div>
+
+        <div class="table-body">
+            @foreach ($blogs as $index => $blog)
+            <div class="table-row big">
+                <div class="table-column">
+                <div class="forum-category">
+                    <a href="forums-category.html">
+                    <img class="forum-category-image" style="width: 80px; height: 80px; border-radius: 18px;" src="{{ asset('uploads/blogs/'.$blog->blog_img) }}" alt="category-07">
+                    </a>
+
+                    <div class="forum-category-info">
+                    <p class="forum-category-title"><a href="forums-category.html">{{ $blog->title }}</a></p>
+                    <p class="forum-category-text">{!! Str::substr($blog->content, 0, 50) !!}</p>
+                    </div>
+                </div>
+                </div>
+
+                <div class="table-column centered padded-medium">
+                <p class="table-title" style="font-size: 1rem; line-height: 22px;">{!! convertToTags($blog->tags) !!}</p>
+                </div>
+
+                <div class="table-column padded-big-left">
+                <a class="table-link" href="#" style="display: block; font-size: 1rem; font-weight: 600; line-height: 26px;">{!! Str::substr($blog->content, 0, 150) !!}</a>
+                </div>
+
+            </div>
+            @endforeach
+
+
+        </div>
+      </div>
+
+      {{ $blogs->links() }}
+
+
+
 </div>
-@endsection
-
-@section('javascript')
-
-@include('backend.components.datatablejs')
-
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable( {
-            dom: 'Bfrtip',
-            "language": {
-                "url": "{{ datatableLang() }}"
-            },
-            buttons: [
-            {
-                extend: 'copy',
-                text: "{{ transWord('Copy') }}",
-                key: {
-                    key: 'c',
-                    altKey: true
-                }
-            },
-            {
-                extend: 'print',
-                text: "{{ transWord('Print') }}",
-                key: {
-                    key: 'p',
-                    altKey: true
-                }
-            },
-
-        ]
-        } );
-    } );
 
 
-</script>
 @endsection
