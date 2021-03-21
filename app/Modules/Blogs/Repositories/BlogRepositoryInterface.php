@@ -13,4 +13,10 @@ interface BlogRepositoryInterface
     public function saveData($request, $id = null);
 
     public function deleteData($id);
+
+    public function getDataSlug($slug);
+
+    public function getReplies($id);
+
+    public function replyBlog($id,$request);
 }

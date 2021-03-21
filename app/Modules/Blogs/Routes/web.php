@@ -15,6 +15,8 @@ Route::group(['middleware' => ['web','auth']], function() {
                 Route::get('/show/{id}', 'BlogController@show')->name('show_blogs');
                 Route::get('/delete/{id}', 'BlogController@destroy')->name('destroy_blogs');
                 Route::post('/upload', 'BlogController@upload')->name('upload_blogs');
+                Route::get('/{slug}', 'BlogController@singleBlog')->name('single_blogs');
+                Route::post('/reply/{id}', 'BlogController@reply')->name('reply_blogs');
             });
         });
     });

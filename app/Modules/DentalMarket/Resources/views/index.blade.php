@@ -5,7 +5,15 @@
 @section('dental_market_active','active')
 
 @section('stylesheet')
-
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<style>
+    #loadingProduct
+    {
+        text-align:center;
+        background: url('{{ asset("dento/img/loader.gif") }}') no-repeat center;
+        height: 150px;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -32,7 +40,7 @@
                 <!-- SIDEBAR BOX -->
                 <div class="form-input">
                     <label for="items-search">Search Items</label>
-                    <input type="text" id="items-search" name="items_search">
+                    <input type="text" id="items-search" name="items_search" class="items_search">
                   </div>
                   <br>
                 <div class="sidebar-box">
@@ -56,7 +64,7 @@
                           </div>
                       @endforeach
                   </div>
-                  <div class="sidebar-box-items" id="second_category">
+                  <div class="sidebar-box-items" id="second_category" class="second_category">
                       <hr>
                   </div>
                   <!-- /SIDEBAR BOX ITEMS -->
@@ -68,7 +76,7 @@
 
                       <div class="checkbox-line">
                       <div class="checkbox-wrap">
-                        <input type="checkbox" id="lab_category" name="lab_category">
+                        <input type="checkbox" id="lab_category" class="lab_category" name="lab_category">
                         <div class="checkbox-box">
                           <svg class="icon-cross">
                             <use xlink:href="#svg-cross"></use>
@@ -76,40 +84,18 @@
                         </div>
                         <label for="lab_category">{{ transWord('Labs') }}</label>
                       </div>
-                      <p class="checkbox-line-text">{{ getCategoryItemCount('item_for',1) }}</p>
                     </div>
 
                   </div>
                   <!-- /SIDEBAR BOX ITEMS -->
 
-                  <!-- SIDEBAR BOX TITLE -->
-                  <p class="sidebar-box-title">Price Range</p>
-                  <!-- /SIDEBAR BOX TITLE -->
+                  <p class="sidebar-box-title" style="margin-bottom: 15px;">Price Range <span id="price_show">[0 - {{ getMaxItemPrice(0) }}]</span></p>
+                  <div class="list-group">
+					<input type="hidden" id="hidden_minimum_price" value="0" />
+                    <input type="hidden" id="hidden_maximum_price" value="{{ getMaxItemPrice(0) }}" />
+                    <div id="price_range"></div>
+                </div>
 
-                  <!-- SIDEBAR BOX ITEMS -->
-                  <div class="sidebar-box-items small-space">
-                    <!-- FORM ITEM -->
-                    <div class="form-item split">
-                      <!-- FORM INPUT -->
-                      <div class="form-input small active always-active currency-decorated">
-                        <label for="price-from">From</label>
-                        <input type="text" id="price-from" name="price_from">
-                      </div>
-                      <!-- /FORM INPUT -->
-
-                      <!-- FORM INPUT -->
-                      <div class="form-input small active always-active currency-decorated">
-                        <label for="price-to">To</label>
-                        <input type="text" id="price-to" name="price_to">
-                      </div>
-                      <!-- /FORM INPUT -->
-                    </div>
-                    <!-- /FORM ITEM -->
-                  </div>
-                  <!-- /SIDEBAR BOX ITEMS -->
-
-                  <!-- BUTTON -->
-                  <button type="submit" class="button small primary">{{ transWord('Apply Filter') }}</button>
                 </div>
                 <!-- /SIDEBAR BOX -->
               </div>
@@ -118,61 +104,8 @@
 
         <!-- MARKETPLACE CONTENT -->
         <div class="marketplace-content">
-          <div class="grid grid-4-4-4 centered">
-            @if (count($dentalMarket) > 0)
-            @foreach ($dentalMarket as $item)
-            <div class="product-preview">
-                <a href="marketplace-product.html">
-                  <figure class="product-preview-image liquid" style="background: url({{ asset('uploads/business_accounts/items/'.$item->image) }}) center center / cover no-repeat;">
-                    <img src="{{ asset('uploads/business_accounts/items/'.$item->image) }}" alt="item-01" style="display: none;">
-                  </figure>
-                </a>
-
-                <div class="product-preview-info" style="min-height: 132px;">
-                  <p class="text-sticker"><span class="highlighted">$</span> {{ $item->price }}</p>
-                  <p class="product-preview-title"><a href="marketplace-product.html">{{ $item->name }}</a></p>
-                    @if ($item->first_category != null)
-                    <p class="product-preview-category digital">
-                        <a href="#">{{ transWord('First Category').': '.$item->firstCat->name }}</a>
-                    </p>
-                    @endif
-                    @if ($item->second_category != null)
-                    <p class="product-preview-category digital">
-                        <a href="#">{{ transWord('Second Category').': '.$item->secondCat->name }}</a>
-                    </p>
-                    @endif
-                    @if ($item->third_category != null)
-                    <p class="product-preview-category digital">
-                        <a href="#">{{ transWord('Third Category').': '.$item->thirdCat->name }}</a>
-                    </p>
-                    @endif
-                </div>
-
-                <div class="product-preview-meta">
-                  <div class="product-preview-author">
-                    <a class="product-preview-author-image user-avatar micro no-border" href="profile-timeline.html">
-                      <div class="user-avatar-content">
-                        <div class="hexagon-image-18-20" data-src="{{ asset(getUserAvatar($item->user->id)) }}" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
-                      </div>
-                    </a>
-                    <p class="product-preview-author-title">{{ transWord('Posted By') }}</p>
-                    <p class="product-preview-author-text"><a href="profile-timeline.html">{{ $item->user->name }}</a></p>
-                  </div>
-
-
-                </div>
-              </div>
-            @endforeach
-            @else
-              <h3>{{ transWord('No Item(s)') }}</h3>
-            @endif
-
-
-          </div>
-
-          <div class="section-pager-bar-wrap">
-              {{ $dentalMarket->links() }}
-          </div>
+            <div class="grid grid-4-4-4 centered filter_data">
+            </div>
         </div>
       </div>
 
@@ -186,7 +119,74 @@
 
 @section('javascript')
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+    $(document).ready(function(){
+
+    filter_data();
+
+    function filter_data()
+    {
+        $('.filter_data').html('<div id="loading" style="" ></div>');
+        var action = 'fetch_data';
+        var price_from = $('#hidden_minimum_price').val();
+        var price_to = $('#hidden_maximum_price').val();
+
+        var first_category = get_filter('first_category');
+        var second_category = get_filter('second_category');
+        var lab_category = get_filter('lab_category');
+        var items_search = $('.items_search').val();
+        $.ajax({
+            url: "{{ route('all_dental_market') }}",
+            method:"GET",
+            data:{action:action, price_from:price_from, price_to:price_to, first_category:first_category, second_category:second_category,lab_category:lab_category,items_search:items_search},
+            success:function(data){
+                $('.filter_data').html(data);
+            }
+        });
+    }
+
+    function get_filter(class_name)
+    {
+        var filter = [];
+        $('.'+class_name+':checked').each(function(){
+            filter.push($(this).val());
+        });
+        // alert(filter);
+        return filter;
+    }
+
+
+    $('#price_range').slider({
+        range:true,
+        min:0,
+        max:'{{ getMaxItemPrice(0) }}',
+        values:[0, {{ getMaxItemPrice(0) }}],
+        step:5,
+        stop:function(event, ui)
+        {
+            $('#price_show').html('['+ui.values[0] + ' - ' + ui.values[1]+']');
+            $('#hidden_minimum_price').val(ui.values[0]);
+            $('#hidden_maximum_price').val(ui.values[1]);
+            filter_data();
+        }
+    });
+
+    $('.first_category').click(function(){
+        filter_data();
+    });
+
+    $('#items-search').on('input',function(){
+        filter_data();
+    });
+
+    $('.second_category').click(function(){
+        filter_data();
+    });
+
+
+});
+
     function arrayRemove(arr, value) {
         return arr.filter(function(ele){
             return ele != value;

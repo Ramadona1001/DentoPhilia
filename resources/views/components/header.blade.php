@@ -104,7 +104,7 @@
               <!-- MENU MAIN ITEM -->
               <li class="menu-main-item">
                 <!-- MENU MAIN ITEM LINK -->
-                <a class="menu-main-item-link" href="#">Our Blog</a>
+                <a class="menu-main-item-link" href="{{ route('blogs') }}">{{ transWord('Our Blog') }}</a>
                 <!-- /MENU MAIN ITEM LINK -->
               </li>
               <!-- /MENU MAIN ITEM -->

@@ -8,6 +8,7 @@ $namespace = "DentalMarket\Controllers";
             Route::group(['middleware' => ['web']], function () {
                 Route::prefix("dental_market")->group(function () {
                     Route::get('/', 'DentalMarketController@index')->name('dental_market');
+                    Route::get('/all', 'DentalMarketController@allDentalProducts')->name('all_dental_market');
                     Route::get('/filter/second-cat/{firstcat}', 'DentalMarketController@filterSecondCat')->name('filter_second_cat_dental_market');
                     Route::post('/filter', 'DentalMarketController@filter')->name('filter_dental_market');
                 });

@@ -551,6 +551,11 @@ function getCasesAndPermissions($type,$permission)
     }
 }
 
+function getUserData($userid)
+{
+    return User::findOrfail($userid);
+}
+
 function getUserAvatar($userid)
 {
     $user = User::findOrfail($userid);
@@ -592,4 +597,9 @@ function getSecondCategory($catid)
     }else{
         return SecondCat::where('id',$catid)->get();
     }
+}
+
+function getMaxItemPrice($species = 0)
+{
+    return \DB::select('select max(price) as "max" from items where species = '.$species)[0]->max;
 }

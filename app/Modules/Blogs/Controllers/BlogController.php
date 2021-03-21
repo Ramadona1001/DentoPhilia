@@ -77,4 +77,22 @@ class BlogController extends Controller
         $this->blogRepository->deleteData($id);
         return back()->with('success','');
     }
+
+    public function singleBlog($slug)
+    {
+        $blog = $this->blogRepository->getDataSlug($slug);
+        $replies = $this->blogRepository->getReplies($blog->id);
+        $title = $blog->title;
+        $pages = [
+            [transWord('All Blogs'),'blogs'],
+            [transWord('Create Blogs'),'create_blogs']
+        ];
+        return view($this->path.'single',compact('pages','title','blog','replies'));
+    }
+
+    public function reply($id,Request $request)
+    {
+        $this->blogRepository->replyBlog($id,$request);
+        return back();
+    }
 }

@@ -3,7 +3,7 @@
 @section('title',$title)
 
 @section('stylesheet')
-
+<script src="http://cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js"></script>
 @endsection
 
 @section('content')
@@ -35,6 +35,9 @@
 
                     <div class="form-row split">
                         {!! BuildField('title' , null , 'text' ,['required' => 'required']) !!}
+                    </div>
+                    <div class="form-row split">
+                        {!! BuildField('slug' , null , 'text' ,['required' => 'required']) !!}
                     </div>
                     <div class="form-row split">
                         {!! BuildField('tags' , null , 'text' ,['required' => 'required']) !!}

@@ -2,6 +2,8 @@
 
 @section('title',$title)
 
+@section('blogs_active','active')
+
 @section('stylesheet')
 <style>
     .page-item{
@@ -40,6 +42,14 @@
                   <use xlink:href="#svg-magnifying-glass"></use>
                 </svg>
               </button>
+              @if (Auth::user()->hasRole('Admin'))
+              <a href="{{ route('create_blogs') }}" class="button primary">
+                <svg class="icon-plus">
+                  <use xlink:href="#svg-plus"></use>
+                </svg>
+                </a>
+              @endif
+
             </div>
           </form>
         </div>
@@ -65,12 +75,12 @@
             <div class="table-row big">
                 <div class="table-column">
                 <div class="forum-category">
-                    <a href="forums-category.html">
+                    <a href="{{ route('single_blogs',$blog->slug) }}">
                     <img class="forum-category-image" style="width: 80px; height: 80px; border-radius: 18px;" src="{{ asset('uploads/blogs/'.$blog->blog_img) }}" alt="category-07">
                     </a>
 
                     <div class="forum-category-info">
-                    <p class="forum-category-title"><a href="forums-category.html">{{ $blog->title }}</a></p>
+                    <p class="forum-category-title"><a href="{{ route('single_blogs',$blog->slug) }}">{{ $blog->title }}</a></p>
                     <p class="forum-category-text">{!! Str::substr($blog->content, 0, 50) !!}</p>
                     </div>
                 </div>

@@ -25,6 +25,10 @@ class BlogRepository implements BlogRepositoryInterface
         return Blog::findOrfail($id);
     }
 
+    public function getDataSlug($slug){
+        return Blog::where('slug',$slug)->get()->first();
+    }
+
     public function saveData($request,$id = null)
     {
         $blogPath = public_path().'/uploads/blogs/';
@@ -42,6 +46,7 @@ class BlogRepository implements BlogRepositoryInterface
         $blog->tags = $request->tags;
         $blog->content = $request->content;
         $blog->publish = $request->publish;
+        $blog->slug = $request->slug;
         if(isset($request->meta_title))
             $blog->meta_title = $request->meta_title;
         if(isset($request->meta_desc))
@@ -54,5 +59,15 @@ class BlogRepository implements BlogRepositoryInterface
     public function deleteData($id)
     {
         $blog = Blog::findOrfail($id)->delete();
+    }
+
+    public function getReplies($id)
+    {
+        return \DB::select('select * from blogs_reply where blog_id = '.$id.' order by id desc');
+    }
+
+    public function replyBlog($id,$request)
+    {
+        \DB::select('insert into blogs_reply (`blog_id`,`user_id`,`content`) values('.$id.','.\Auth::user()->id.',"'.$request->content.'")');
     }
 }
