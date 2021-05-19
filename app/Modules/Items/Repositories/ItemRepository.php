@@ -73,5 +73,19 @@ class ItemRepository implements ItemRepositoryInterface
         $item->delete();
     }
 
+    public function approveData($id)
+    {
+        $item = $this->getDataId($id);
+        if ($item->publish == 0) $item->publish = 1;
+        $item->save();
+    }
+
+    public function disApproveData($id)
+    {
+        $item = $this->getDataId($id);
+        if ($item->publish == 1) $item->publish = 0;
+        $item->save();
+    }
+
 
 }

@@ -7,6 +7,7 @@ use Courses\Models\Course;
 use CourseSections\Models\CourseSection;
 use CourseSessions\Models\CourseSession;
 use Doctors\Models\Doctor;
+use Friends\Models\Friend;
 use Items\Models\Item;
 use ItemsCategories\Models\FirstCat;
 use ItemsCategories\Models\SecondCat;
@@ -554,6 +555,21 @@ function getCasesAndPermissions($type,$permission)
 function getUserData($userid)
 {
     return User::findOrfail($userid);
+}
+
+function checkIsFriend($touser){
+    $friend = Friend::where('to_user',$touser)->where('from_user',Auth::user()->id)->get();
+
+    if (count($friend) > 0) {
+        $friend = $friend->first();
+        if ($friend->status == 0) {
+            return 'pending';
+        }else{
+            return 'firend';
+        }
+    }else{
+        return 'not firend';
+    }
 }
 
 function getUserAvatar($userid)

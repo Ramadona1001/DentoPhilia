@@ -62,7 +62,7 @@ class LabsMarketController extends Controller
     {
         if(isset($_GET["action"]))
         {
-            $total_row = Item::where('id','>',0)->where('species',1);
+            $total_row = Item::where('id','>',0)->where('species',1)->where('publish',1);
             if (isset($_GET['items_search'])) {
                 $total_row->where('name','like','%'.$_GET["items_search"].'%');
             }

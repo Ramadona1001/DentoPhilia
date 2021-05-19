@@ -17,8 +17,8 @@ class UserRepository implements UserRepositoryInterface
         return User::paginate(10);
     }
 
-    public function getDataId($id){
-        return User::findOrfail($id);
+    public function getDataId($username){
+        return User::where('username',$username)->get()->first();
     }
 
     public function getPermissions($id){

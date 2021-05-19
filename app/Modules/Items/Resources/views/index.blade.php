@@ -33,7 +33,7 @@
 
     <div class="grid grid-3-3-3 centered-on-mobile">
         <!-- CREATE ENTITY BOX -->
-        <div class="create-entity-box v2" style="height: 390px;">
+        <div class="create-entity-box v2" style="height: 410px;">
           <!-- CREATE ENTITY BOX COVER -->
           <div class="create-entity-box-cover"></div>
           <!-- /CREATE ENTITY BOX COVER -->
@@ -69,7 +69,7 @@
         <!-- /CREATE ENTITY BOX -->
 
         @foreach ($items as $item)
-        <div class="product-preview fixed-height" style="height: 390px;">
+        <div class="product-preview fixed-height" style="height: 410px;">
             <!-- PRODUCT PREVIEW IMAGE -->
             <a href="marketplace-product.html" title="{{ $item->desc }}">
               <figure class="product-preview-image liquid" style="background: url({{ asset('uploads/business_accounts/items/'.$item->image) }}) center center / cover no-repeat;">
@@ -121,7 +121,7 @@
               <div class="user-preview-actions">
 
                 @can('show_items')
-                <a href="#" class="button secondary" style="width: 40%" title="{{ transWord('View Information') }}">
+                <a href="#" class="button secondary" style="width: 30%" title="{{ transWord('View Information') }}">
                     <svg class="menu-item-link-icon icon-comment" style="fill: white;">
                         <use xlink:href="#svg-comment"></use>
                     </svg>
@@ -129,11 +129,27 @@
                 @endcan
 
                 @can('update_items')
-                <a href="#" class="button secondary" style="width: 40%" title="{{ transWord('Update Information') }}">
+                <a href="#" class="button secondary" style="width: 30%" title="{{ transWord('Update Information') }}">
                     <svg class="menu-item-link-icon icon-delete" style="fill: white;">
                         <use xlink:href="#svg-delete"></use>
                     </svg>
                 </a>
+                @endcan
+
+                @can('approve_items')
+                @if ($item->publish == 0)
+                <a href="{{ route('approve_items',Crypt::encrypt($item->id)) }}" class="button secondary" style="width: 30%" title="{{ transWord('Approve') }}">
+                    <svg class="menu-item-link-icon icon-check" style="fill: white;">
+                        <use xlink:href="#svg-check"></use>
+                    </svg>
+                </a>
+                @else
+                <a href="{{ route('disapprove_items',Crypt::encrypt($item->id)) }}" class="button secondary" style="width: 30%" title="{{ transWord('Disapprove') }}">
+                    <svg class="menu-item-link-icon icon-return" style="fill: white;">
+                        <use xlink:href="#svg-return"></use>
+                    </svg>
+                </a>
+                @endif
                 @endcan
 
 

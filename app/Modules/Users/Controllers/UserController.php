@@ -39,6 +39,20 @@ class UserController extends Controller
         return view($this->path.'index',compact('users','pages','title'));
     }
 
+    public function profile($username)
+    {
+        hasPermissions('show_users_profile');
+        $user = $this->userRepository->getDataId($username);
+
+        $title = $user->name.' '.transWord('Profile');
+
+        $pages = [
+            ['#','#']
+        ];
+
+        return view($this->path.'profile',compact('user','pages','title'));
+    }
+
     public function permissions($id)
     {
         $id = Crypt::decrypt($id);

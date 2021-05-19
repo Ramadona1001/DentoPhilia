@@ -196,6 +196,8 @@ return [
         DentalMarket\Providers\DentalMarketServiceProvider::class,
         CasesMarket\Providers\CasesMarketServiceProvider::class,
         LabsMarket\Providers\LabsMarketServiceProvider::class,
+        Friends\Providers\FriendServiceProvider::class,
+        Videos\Providers\VideoServiceProvider::class,
 
     ],
 

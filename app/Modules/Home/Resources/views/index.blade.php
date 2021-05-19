@@ -69,6 +69,16 @@
         </a>
         @endcan
 
+        @can('show_items')
+        <a class="product-category-box users-featured" href="{{ route('items') }}">
+          <p class="product-category-box-title">{{ transWord('Items') }}</p>
+          @can('roles_statistics')
+          <p class="product-category-box-text">{{ transWord('All Items in System') }}</p>
+          <p class="product-category-box-tag">254 {{ transWord('item') }}</p>
+          @endcan
+        </a>
+        @endcan
+
         @can('show_items_categories')
         <a class="product-category-box users-featured" href="{{ route('items_categories') }}">
           <p class="product-category-box-title">{{ transWord('Items Categories') }}</p>

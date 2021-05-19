@@ -16,7 +16,7 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "livewire/livewire": "^2.3",
+        "livewire/livewire": "^2.4",
         "maatwebsite/excel": "^3.1",
         "mcamara/laravel-localization": "^1.5",
         "spatie/laravel-permission": "^3.13",
@@ -60,7 +60,9 @@
             "ItemsCategories\\": "app/Modules/ItemsCategories/",
             "DentalMarket\\": "app/Modules/DentalMarket/",
             "CasesMarket\\": "app/Modules/CasesMarket/",
-            "LabsMarket\\": "app/Modules/LabsMarket/"
+            "LabsMarket\\": "app/Modules/LabsMarket/",
+            "Friends\\": "app/Modules/Friends/",
+            "Videos\\": "app/Modules/Videos/"
         },
         "files": [
             "app/helper/helper.php",

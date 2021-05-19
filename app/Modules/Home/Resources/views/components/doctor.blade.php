@@ -44,7 +44,7 @@
                             <div class="reaction-stat">
                                 <img class="reaction-stat-image" src="{{ asset('dento/img/icons/black/item.png') }}" alt="reaction-like">
                                 <p class="reaction-stat-title" style="text-transform: uppercase;">{{ transWord('Item') }}</p>
-                                <p class="reaction-stat-text"><a href="{{ route('all_doctor_cases',['type'=>'endo']) }}">{{ transWord('View') }}</a></p>
+                                <p class="reaction-stat-text"><a href="{{ route('create_items') }}">{{ transWord('View') }}</a></p>
                             </div>
                         </div>
                         @endcan
@@ -155,6 +155,16 @@
                                 <img class="reaction-stat-image" src="{{ asset('dento/img/icons/black/designer.png') }}" alt="reaction-like">
                                 <p class="reaction-stat-title" style="text-transform: uppercase;">{{ transWord('Dental Designer') }}</p>
                                 <p class="reaction-stat-text"><a href="{{ route('all_doctor_cases',['type'=>'dental_designer']) }}">{{ transWord('View') }}</a></p>
+                            </div>
+                        </div>
+                        @endcan
+
+                        @can('upload_videos')
+                        <div class="slider-slide tns-item" id="reaction-stats-slider-item1" aria-hidden="true" tabindex="-1">
+                            <div class="reaction-stat">
+                                <img class="reaction-stat-image" src="{{ asset('dento/img/icons/black/video.png') }}" alt="reaction-like">
+                                <p class="reaction-stat-title" style="text-transform: uppercase;">{{ transWord('Upload Video') }}</p>
+                                <p class="reaction-stat-text"><a href="{{ route('create_videos') }}">{{ transWord('View') }}</a></p>
                             </div>
                         </div>
                         @endcan

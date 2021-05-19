@@ -85,4 +85,20 @@ class ItemController extends Controller
         return redirect()->route('items')->with('success','');
     }
 
+    public function approve($id)
+    {
+        hasPermissions('approve_items');
+        $id = Crypt::decrypt($id);
+        $this->itemRepository->approveData($id);
+        return redirect()->route('items')->with('success','');
+    }
+
+    public function disapprove($id)
+    {
+        hasPermissions('approve_items');
+        $id = Crypt::decrypt($id);
+        $this->itemRepository->disApproveData($id);
+        return redirect()->route('items')->with('success','');
+    }
+
 }

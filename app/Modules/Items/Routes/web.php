@@ -13,6 +13,8 @@ $namespace = "Items\Controllers";
                     Route::get('/edit/{id}', 'ItemController@edit')->name('edit_items');
                     Route::post('/update/{id}', 'ItemController@update')->name('update_items');
                     Route::get('/delete/{id}', 'ItemController@delete')->name('delete_items');
+                    Route::get('/approve/{id}', 'ItemController@approve')->name('approve_items');
+                    Route::get('/disapprove/{id}', 'ItemController@disapprove')->name('disapprove_items');
                 });
             });
         });

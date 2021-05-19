@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('dento/css/vendor/simplebar.css') }}">
     <link rel="stylesheet" href="{{ asset('dento/css/vendor/tiny-slider.css') }}">
     <link rel="icon" href="{{ asset('dento/img/icon.ico') }}">
+    <livewire:styles />
     @yield('stylesheet')
     <style>
         .not-allow-input{
@@ -43,6 +44,11 @@
             position: absolute;
             top: 9px;
             left: 8px;
+        }
+        @media (max-width: 500px) {
+            .header .header-actions.search-bar .header-search-dropdown{
+                width: 69% !important;
+            }
         }
     </style>
     <title>DentoPhilia | @yield('title')</title>

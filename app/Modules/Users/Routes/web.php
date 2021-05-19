@@ -8,6 +8,7 @@ $namespace = "Users\Controllers";
             Route::group(['middleware' => ['web']], function () {
                 Route::prefix("users")->group(function () {
                     Route::get('/', 'UserController@index')->name('users');
+                    Route::get('/profile/{username}', 'UserController@profile')->name('profile_users');
                     Route::get('/permissions/{id}', 'UserController@permissions')->name('permissions_users');
                     Route::get('/assign/permissions/{id}', 'UserController@assignPermissions')->name('assign_permissions_users');
                     Route::get('/delete/{id}', 'UserController@destroy')->name('destroy_users');

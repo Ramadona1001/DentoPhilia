@@ -18,7 +18,7 @@ $namespace = "BusinessAccounts\Controllers";
                     Route::get('/disapprove/{id}', 'BusinessAccountController@disapprove')->name('disapprove_business_accounts');
                     Route::get('/complete-profile', 'BusinessAccountController@completeProfile')->name('complete_profile_business_accounts');
                     Route::post('/completeprofile', 'BusinessAccountController@completeProfilePost')->name('complete_profile_post_business_accounts');
-                    Route::get('/profile', 'BusinessAccountController@profile')->name('profile_business_accounts');
+                    // Route::get('/profile', 'BusinessAccountController@profile')->name('profile_business_accounts');
                     Route::get('/items', 'BusinessAccountController@items')->name('items_business_accounts');
                 });
             });
